@@ -1,0 +1,92 @@
+name: TitleInfo
+version: '${project.version}'
+main: me.rrs.titleInfo.TitleInfo
+api-version: '1.13'
+authors: [ RRS ]
+description: §6✨ Elevates Minecraft with customizable action bar displays, coordinate sharing, and advanced waypoint management! §r
+
+# Command Definitions
+commands:
+  titleinfo:
+    description: §eCore command for managing action bar displays, sharing coordinates, handling waypoints, and admin tools.
+    usage: §e/<command> <display|share|waypoint|admin> [args]
+    aliases: [ti]
+    permission: titleinfo.use
+    permission-message: §c✖ You don’t have permission to use §e/titleinfo§c!
+
+# Permission Definitions
+permissions:
+  titleinfo.use:
+    description: §aGrants basic access to the §e/titleinfo §acommand.
+    default: true
+
+  # Display Permissions
+  titleinfo.display:
+    description: §aEnables toggling of action bar display options (§fcoordinates, direction, etc.§a).
+    default: true
+    children:
+      titleinfo.use: true
+
+  # Share Permissions
+  titleinfo.share:
+    description: §aPermits sharing your coordinates with others.
+    default: true
+    children:
+      titleinfo.use: true
+      titleinfo.share.global: true
+      titleinfo.share.private: true
+  titleinfo.share.global:
+    description: §aAllows broadcasting coordinates to §lall players§a!
+    default: true
+  titleinfo.share.private:
+    description: §aLets you send coordinates to a §fspecific player§a.
+    default: true
+
+  # Waypoint Permissions
+  titleinfo.waypoint:
+    description: §aUnlocks waypoint management (§fset, remove, list, view§a).
+    default: true
+    children:
+      titleinfo.use: true
+      titleinfo.waypoint.set: true
+      titleinfo.waypoint.remove: true
+      titleinfo.waypoint.list: true
+      titleinfo.waypoint.view: true
+  titleinfo.waypoint.set:
+    description: §aPermits setting new waypoints.
+    default: true
+  titleinfo.waypoint.remove:
+    description: §aAllows removing existing waypoints.
+    default: true
+  titleinfo.waypoint.list:
+    description: §aEnables listing all your waypoints.
+    default: true
+  titleinfo.waypoint.view:
+    description: §aLets you view waypoint details or toggle active waypoints.
+    default: true
+
+  # Admin Permissions
+  titleinfo.admin:
+    description: §c⚡ Grants §lFULL CONTROL§c over TitleInfo, including admin commands to manage other players’ waypoints and displays!
+    default: op
+    children:
+      titleinfo.use: true
+      titleinfo.display: true
+      titleinfo.share: true
+      titleinfo.waypoint: true
+      titleinfo.admin.waypoint: true
+      titleinfo.admin.display: true
+
+  titleinfo.admin.waypoint:
+    description: §cAllows admins to §fset, remove, list, view, or teleport §cwaypoints for other players.
+    default: op
+    children:
+      titleinfo.admin.waypoint.tp: true
+
+  titleinfo.admin.waypoint.tp:
+    description: §cAllows admins to teleport to any player's saved waypoint.
+    default: op
+
+  titleinfo.admin.display:
+    description: §cPermits admins to §fenable/disable §cdisplay options for other players.
+    default: op

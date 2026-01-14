@@ -1,0 +1,8 @@
+Config:
+  Version: ${project.version}
+display_options:
+  coordinates: true
+  direction: true
+  time: true
+  biome: true
+  waypoint: true
